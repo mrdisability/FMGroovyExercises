@@ -42,3 +42,6 @@ class Tweet {
         this.likes += 1;
     }
 }
+
+//Tweet secondTweet = new Tweet("Second Tweet", "Ioane");
+//println secondTweet;
