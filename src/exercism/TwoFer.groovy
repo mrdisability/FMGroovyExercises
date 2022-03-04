@@ -15,12 +15,12 @@ package exercism
 //Zaphod	One for Zaphod, one for me.
 
 static String twoFer(String name) {
-    if (name != null) {
-        if (!name.isEmpty()) {
-            return "One for $name, one for me."
-        }
-    } else {
+    if (name == null) {
         return "One for you, one for me."
+    } else if (name.isEmpty()){
+        return "One for you, one for me."
+    } else {
+        return "One for $name, one for me."
     }
 }
 
