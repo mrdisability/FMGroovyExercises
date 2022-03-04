@@ -25,7 +25,7 @@ formatToLowerCaseClosure.call("Hello! Closure")
 def greet = {
     return "Hello! ${it}"
 }
-assert greet("Alex") == "Hello! Alex"
+assert greet("King") == "Hello! King"
 println greet.call("King")
 println greet("King")
 
@@ -40,22 +40,27 @@ def calculate = {int x, int y, String operation ->
     def result = 0
     switch(operation) {
         case "ADD":
-            result = x+y
+            result = x + y
             break
         case "SUB":
-            result = x-y
+            result = x - y
             break
         case "MUL":
-            result = x*y
+            result = x * y
             break
         case "DIV":
-            result = x/y
+            result = x / y
             break
     }
     return result
 }
 assert calculate(12, 4, "ADD") == 16
 assert calculate(43, 8, "DIV") == 5.375
+
+println calculate(12, 4, "ADD")
+println calculate(12, 4, "SUB")
+println calculate(12, 4, "MUL")
+println calculate(12, 4, "DIV")
 
 //So far, we've seen the syntax, execution, and parameters of closures, which are fairly similar to methods.
 // Let's now compare closures with methods.
