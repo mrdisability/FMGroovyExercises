@@ -24,7 +24,13 @@ static String twoFer(String name) {
     }
 }
 
+static String twoFerBetter(String name) {
+    name ? "One for $name, one for me." : "One for you, one for me."
+}
+
 println twoFer("Alice")
 println twoFer("Bob")
 println twoFer()
 println twoFer("Zaphod")
+
+println twoFerBetter("Alice")
