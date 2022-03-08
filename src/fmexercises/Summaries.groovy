@@ -3,6 +3,7 @@ package fmexercises
 import groovy.json.JsonBuilder
 import groovy.json.JsonSlurper
 
+println "Exercise 1"
 // Read from json file
 JsonSlurper slurper = new JsonSlurper()
 def json = slurper.parse(new File('price.json'))
@@ -116,4 +117,80 @@ productTypebuilder.products {
 }
 
 new File('data/productsByProductType.json').write(productTypebuilder.toPrettyString())
+
+println "Exercise 3"
+// Exercise 3
+// 3. Validate outliers in each product category.
+// Find the accepted price range:  between 25% and 200% of the average price in the category.
+// Identify the minimum and maximum price points and list all items that fall outside the
+// range and would be considered outliers.
+
+// economy, standard, premium
+// find average, .25 and 2 of average to find min and max
+// Display outliers
+// the sum of the numbers divided by the total number of values in the set
+
+// economy
+Double getAverage(List products) {
+    def sum = 0
+
+    for (product in products) {
+        sum += product.price.toDouble()
+    }
+
+    return sum / products.size()
+}
+def economyMax = economyProducts.max { it.price.toDouble() }
+def economyMin = economyProducts.min { it.price.toDouble() }
+println "Economy"
+println "Average: ${getAverage(economyProducts)}"
+println "Min: ${economyMin.price}"
+println "Max: ${economyMax.price}"
+def twentyFive = getAverage(economyProducts) - 0.25 * getAverage(economyProducts)
+def twoHundred = 2 * getAverage(economyProducts) + getAverage(economyProducts)
+println "25%: $twentyFive"
+println "200%: $twoHundred"
+// < 25 and > 200
+def economyOutliers = economyProducts.findAll {
+    product ->
+        product.price.toDouble() < twentyFive && product.price.toDouble() > twoHundred
+}
+println economyOutliers
+
+def standardMax = standardProducts.max { it.price.toDouble() }
+def standardMin = standardProducts.min { it.price.toDouble() }
+println "Standard"
+println "Average: ${getAverage(standardProducts)}"
+println "Min: ${standardMin.price}"
+println "Max: ${standardMax.price}"
+def twentyFiveStandard = getAverage(standardProducts) - 0.25 * getAverage(standardProducts)
+def twoHundredStandard = 2 * getAverage(standardProducts) + getAverage(standardProducts)
+println "25%: $twentyFiveStandard"
+println "200%: $twoHundredStandard"
+// < 25 and > 200
+def standardOutliers = standardProducts.findAll {
+    product ->
+        product.price.toDouble() < twentyFiveStandard &&
+                product.price.toDouble() > twoHundredStandard
+}
+println standardOutliers
+
+def premiumMax = premiumProducts.max { it.price.toDouble() }
+def premiumMin = premiumProducts.min { it.price.toDouble() }
+println "Premium"
+println "Average: ${getAverage(premiumProducts)}"
+//println "Min: ${premiumMin.price}"
+//println "Max: ${premiumMax.price}"
+def twentyFivePremium = getAverage(premiumProducts) - 0.25 * getAverage(premiumProducts)
+def twoHundredPremium = 2 * getAverage(premiumProducts) + getAverage(premiumProducts)
+//println "25%: $twentyFivePremium"
+//println "200%: $twoHundredPremium"
+// < 25 and > 200
+def premiumOutliers = premiumProducts.findAll {
+    product ->
+        product.price.toDouble() < twentyFivePremium &&
+                product.price.toDouble() > twoHundredPremium
+}
+println premiumOutliers
+
 
