@@ -140,55 +140,44 @@ Double getAverage(List products) {
 
     return sum / products.size()
 }
-def economyMax = economyProducts.max { it.price.toDouble() }
-def economyMin = economyProducts.min { it.price.toDouble() }
+
 println "Economy"
 println "Average: ${getAverage(economyProducts)}"
-println "Min: ${economyMin.price}"
-println "Max: ${economyMax.price}"
-def twentyFive = getAverage(economyProducts) - 0.25 * getAverage(economyProducts)
-def twoHundred = 2 * getAverage(economyProducts) + getAverage(economyProducts)
-println "25%: $twentyFive"
-println "200%: $twoHundred"
-// < 25 and > 200
+def twentyFive = 0.25 * getAverage(economyProducts)
+def twoHundred = 2 * getAverage(economyProducts)
+//println "25%: $twentyFive"
+//println "200%: $twoHundred"
+// < 25 or > 200
 def economyOutliers = economyProducts.findAll {
     product ->
-        product.price.toDouble() < twentyFive && product.price.toDouble() > twoHundred
+        product.price.toDouble() < twentyFive || product.price.toDouble() > twoHundred
 }
 println economyOutliers
 
-def standardMax = standardProducts.max { it.price.toDouble() }
-def standardMin = standardProducts.min { it.price.toDouble() }
 println "Standard"
 println "Average: ${getAverage(standardProducts)}"
-println "Min: ${standardMin.price}"
-println "Max: ${standardMax.price}"
-def twentyFiveStandard = getAverage(standardProducts) - 0.25 * getAverage(standardProducts)
-def twoHundredStandard = 2 * getAverage(standardProducts) + getAverage(standardProducts)
-println "25%: $twentyFiveStandard"
-println "200%: $twoHundredStandard"
-// < 25 and > 200
+def twentyFiveStandard = 0.25 * getAverage(standardProducts)
+def twoHundredStandard = 2 * getAverage(standardProducts)
+//println "25%: $twentyFiveStandard"
+//println "200%: $twoHundredStandard"
+// < 25 or > 200
 def standardOutliers = standardProducts.findAll {
     product ->
-        product.price.toDouble() < twentyFiveStandard &&
+        product.price.toDouble() < twentyFiveStandard ||
                 product.price.toDouble() > twoHundredStandard
 }
 println standardOutliers
 
-def premiumMax = premiumProducts.max { it.price.toDouble() }
-def premiumMin = premiumProducts.min { it.price.toDouble() }
+//def premiumMax = premiumProducts.max { it.price.toDouble() }
+//def premiumMin = premiumProducts.min { it.price.toDouble() }
 println "Premium"
 println "Average: ${getAverage(premiumProducts)}"
-//println "Min: ${premiumMin.price}"
-//println "Max: ${premiumMax.price}"
-def twentyFivePremium = getAverage(premiumProducts) - 0.25 * getAverage(premiumProducts)
-def twoHundredPremium = 2 * getAverage(premiumProducts) + getAverage(premiumProducts)
-//println "25%: $twentyFivePremium"
-//println "200%: $twoHundredPremium"
-// < 25 and > 200
+def twentyFivePremium = 0.25 * getAverage(premiumProducts)
+def twoHundredPremium = 2 * getAverage(premiumProducts)
+// < 25 or > 200
 def premiumOutliers = premiumProducts.findAll {
     product ->
-        product.price.toDouble() < twentyFivePremium &&
+        product.price.toDouble() < twentyFivePremium ||
                 product.price.toDouble() > twoHundredPremium
 }
 println premiumOutliers
