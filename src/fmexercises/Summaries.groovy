@@ -1,5 +1,6 @@
 package fmexercises
 
+import groovy.json.JsonBuilder
 import groovy.json.JsonSlurper
 
 // Read from json file
@@ -89,4 +90,30 @@ def otherTypeProducts = products -= clothingTypeProducts
 otherTypeProducts = products -= healthTypeProducts
 
 println otherTypeProducts.size()
+
+// Exercise 2
+// Create two new files
+// a) By price category, within each category, ordered by id
+//JsonBuilder builder = new JsonBuilder()
+
+JsonBuilder builder = new JsonBuilder()
+
+builder.products {
+    economy(economyProducts.sort {it.id})
+    standard(standardProducts.sort {it.id})
+    premium(premiumProducts.sort {it.id})
+}
+
+new File('data/productsByPriceCategory.json').write(builder.toPrettyString())
+
+// b) By product type, ordered by price within each product type
+JsonBuilder productTypebuilder = new JsonBuilder()
+
+productTypebuilder.products {
+    clothing(clothingTypeProducts.sort {it.price.toDouble()})
+    health(healthTypeProducts.sort {it.price.toDouble()})
+    other(otherTypeProducts.sort {it.price.toDouble()})
+}
+
+new File('data/productsByProductType.json').write(productTypebuilder.toPrettyString())
 
