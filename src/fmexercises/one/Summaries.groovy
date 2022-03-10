@@ -182,4 +182,6 @@ def premiumOutliers = premiumProducts.findAll {
 }
 println premiumOutliers
 
+// Hello
+
 
