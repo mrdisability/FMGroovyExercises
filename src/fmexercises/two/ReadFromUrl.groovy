@@ -106,17 +106,29 @@ new File('data/productsByProductType.json').write(productTypebuilder.toPrettyStr
 // Average: Sum of the numbers divided by the total number of values in the set
 
 // Calculate using collect
-Double getAverage(List products) {
-    def sum = 0
+//Double getAverage(List products) {
+//    def sum = 0
+//
+//    for (product in products) {
+//        sum += product.price.toBigDecimal()
+//    }
+//
+//    return sum / products.size()
+//}
 
-    for (product in products) {
-        sum += product.price.toBigDecimal()
-    }
+def economyAverage = economyProducts.stream()
+        .mapToDouble(product -> product.price.toDouble())
+        .average()
+        .orElse(0)
 
-    return sum / products.size()
+BigDecimal getAverage(List productList) {
+    BigDecimal average = productList.sum {it.price.toBigDecimal()} / productList.size()
+    return average
 }
 
-// println "Average: ${getAverage(economyProducts)}"
+//println "Economy Average: ${getAverage(economyProducts)}"
+
+//println "Average: ${getAverage(economyProducts)}"
 def twentyFivePercentOfEconomyAverage = 0.25 * getAverage(economyProducts)
 def twoHundredPercentOfEconomyAverage = 2 * getAverage(economyProducts)
 // < 25 or > 200
