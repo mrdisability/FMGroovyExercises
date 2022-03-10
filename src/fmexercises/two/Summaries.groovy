@@ -17,15 +17,15 @@ def PREMIUM_MIN = 100
 
 // a) Number of products per category - economy: price < 10, standard: 10 - 99, premium: 100+
 List economyProducts = products.findAll { product ->
-    product.price.toDouble() < ECONOMY_MAX }
+    product.price.toBigDecimal() < ECONOMY_MAX }
 
 List standardProducts = products.findAll {
-    product ->  product.price.toDouble() >= STANDARD_MIN &&
-            product.price.toDouble() <= STANDARD_MAX
+    product ->  product.price.toBigDecimal() >= STANDARD_MIN &&
+            product.price.toBigDecimal() <= STANDARD_MAX
 }
 
 List premiumProducts = products.findAll {
-    product ->  product.price.toDouble() >= PREMIUM_MIN
+    product ->  product.price.toBigDecimal() >= PREMIUM_MIN
 }
 
 println "Economy Total: ${economyProducts.size()}"
@@ -80,9 +80,9 @@ new File('data/productsByPriceCategory.json').write(builder.toPrettyString())
 JsonBuilder productTypebuilder = new JsonBuilder()
 
 productTypebuilder.products {
-    clothing(clothingTypeProducts.sort {it.price.toDouble()})
-    health(healthTypeProducts.sort {it.price.toDouble()})
-    other(otherTypeProducts.sort {it.price.toDouble()})
+    clothing(clothingTypeProducts.sort {it.price.toBigDecimal()})
+    health(healthTypeProducts.sort {it.price.toBigDecimal()})
+    other(otherTypeProducts.sort {it.price.toBigDecimal()})
 }
 
 new File('data/productsByProductType.json').write(productTypebuilder.toPrettyString())
@@ -104,7 +104,7 @@ Double getAverage(List products) {
     def sum = 0
 
     for (product in products) {
-        sum += product.price.toDouble()
+        sum += product.price.toBigDecimal()
     }
 
     return sum / products.size()
@@ -117,8 +117,8 @@ def twoHundredPercentOfEconomyAverage = 2 * getAverage(economyProducts)
 // < 25 or > 200
 def economyOutliers = economyProducts.findAll {
     product ->
-        product.price.toDouble() < twentyFivePercentOfEconomyAverage ||
-                product.price.toDouble() > twoHundredPercentOfEconomyAverage
+        product.price.toBigDecimal() < twentyFivePercentOfEconomyAverage ||
+                product.price.toBigDecimal() > twoHundredPercentOfEconomyAverage
 }
 println economyOutliers
 
@@ -128,8 +128,8 @@ def twoHundredPercentOfStandardAverage = 2 * getAverage(standardProducts)
 // < 25 or > 200
 def standardOutliers = standardProducts.findAll {
     product ->
-        product.price.toDouble() < twentyFivePercentOfStandardAverage ||
-                product.price.toDouble() > twoHundredPercentOfStandardAverage
+        product.price.toBigDecimal() < twentyFivePercentOfStandardAverage ||
+                product.price.toBigDecimal() > twoHundredPercentOfStandardAverage
 }
 println standardOutliers
 
@@ -141,7 +141,7 @@ def twoHundredPercentOfPremiumAverage = 2 * getAverage(premiumProducts)
 // < 25 or > 200
 def premiumOutliers = premiumProducts.findAll {
     product ->
-        product.price.toDouble() < twentyFivePercentOfPremiumAverage ||
-                product.price.toDouble() > twoHundredPercentOfPremiumAverage
+        product.price.toBigDecimal() < twentyFivePercentOfPremiumAverage ||
+                product.price.toBigDecimal() > twoHundredPercentOfPremiumAverage
 }
 println premiumOutliers
