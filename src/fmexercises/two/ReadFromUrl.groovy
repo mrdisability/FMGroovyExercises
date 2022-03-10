@@ -116,19 +116,27 @@ new File('data/productsByProductType.json').write(productTypebuilder.toPrettyStr
 //    return sum / products.size()
 //}
 
-def economyAverage = economyProducts.stream()
-        .mapToDouble(product -> product.price.toDouble())
-        .average()
-        .orElse(0)
+BigDecimal getAverageThree(List productList) {
+    BigDecimal average = productList.stream()
+            .mapToDouble(product -> product.price.toDouble())
+            .average()
+            .orElse(0)
+    return average
+}
 
 BigDecimal getAverage(List productList) {
     BigDecimal average = productList.sum {it.price.toBigDecimal()} / productList.size()
     return average
 }
 
-//println "Economy Average: ${getAverage(economyProducts)}"
+BigDecimal getAverageTwo(List productList) {
+    return productList.average {it.price.toBigDecimal()} as BigDecimal
+}
 
-//println "Average: ${getAverage(economyProducts)}"
+println "Average One: ${getAverage(economyProducts)}"
+println "Average Two: ${getAverageTwo(economyProducts)}"
+println "Average Three: ${getAverageThree(economyProducts)}"
+
 def twentyFivePercentOfEconomyAverage = 0.25 * getAverage(economyProducts)
 def twoHundredPercentOfEconomyAverage = 2 * getAverage(economyProducts)
 // < 25 or > 200
