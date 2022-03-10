@@ -110,7 +110,7 @@ Double getAverage(List products) {
     return sum / products.size()
 }
 
-println "Economy"
+println "Economy Outliers"
 // println "Average: ${getAverage(economyProducts)}"
 def twentyFivePercentOfEconomyAverage = 0.25 * getAverage(economyProducts)
 def twoHundredPercentOfEconomyAverage = 2 * getAverage(economyProducts)
@@ -122,7 +122,7 @@ def economyOutliers = economyProducts.findAll {
 }
 println economyOutliers
 
-println "Standard"
+println "Standard Outliers"
 def twentyFivePercentOfStandardAverage = 0.25 * getAverage(standardProducts)
 def twoHundredPercentOfStandardAverage = 2 * getAverage(standardProducts)
 // < 25 or > 200
@@ -135,7 +135,7 @@ println standardOutliers
 
 //def premiumMax = premiumProducts.max { it.price.toDouble() }
 //def premiumMin = premiumProducts.min { it.price.toDouble() }
-println "Premium"
+println "Premium Outliers"
 def twentyFivePercentOfPremiumAverage = 0.25 * getAverage(premiumProducts)
 def twoHundredPercentOfPremiumAverage = 2 * getAverage(premiumProducts)
 // < 25 or > 200
