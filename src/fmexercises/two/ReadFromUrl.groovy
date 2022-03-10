@@ -133,9 +133,9 @@ BigDecimal getAverageTwo(List productList) {
     return productList.average {it.price.toBigDecimal()} as BigDecimal
 }
 
-println "Average One: ${getAverage(economyProducts)}"
-println "Average Two: ${getAverageTwo(economyProducts)}"
-println "Average Three: ${getAverageThree(economyProducts)}"
+//println "Average One: ${getAverage(economyProducts)}"
+//println "Average Two: ${getAverageTwo(economyProducts)}"
+//println "Average Three: ${getAverageThree(economyProducts)}"
 
 def twentyFivePercentOfEconomyAverage = 0.25 * getAverage(economyProducts)
 def twoHundredPercentOfEconomyAverage = 2 * getAverage(economyProducts)
