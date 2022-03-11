@@ -1,9 +1,13 @@
 package fmexercises.two
 
+import ch.qos.logback.classic.encoder.PatternLayoutEncoder
+import ch.qos.logback.core.FileAppender
 import groovy.json.JsonBuilder
 import groovy.json.JsonSlurper
 import groovyx.net.http.ContentType
 import groovyx.net.http.RESTClient
+
+import java.util.logging.Logger
 
 // RESTClient dependency
 // Have to downgrade groovy for it to work
@@ -182,6 +186,11 @@ println "Standard Outliers"
 println standardOutliers
 println "Premium Outliers"
 println premiumOutliers
+
+MyLogger myLogger = new MyLogger()
+myLogger.debug("Economy Total Size: ${economyProducts.size()}")
+
+myLogger.error("One product is not in range")
 
 
 
