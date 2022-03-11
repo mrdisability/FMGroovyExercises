@@ -1,0 +1,3 @@
+14:12:14.154 [main] DEBUG fmexercises.two.MyLogger - Economy Total Size: 9
+14:14:28.971 [main] DEBUG fmexercises.two.MyLogger - Economy Total Size: 9
+14:14:28.976 [main] ERROR fmexercises.two.MyLogger - One product is not in range

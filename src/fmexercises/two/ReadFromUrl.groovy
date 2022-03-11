@@ -1,9 +1,13 @@
 package fmexercises.two
 
+import ch.qos.logback.classic.encoder.PatternLayoutEncoder
+import ch.qos.logback.core.FileAppender
 import groovy.json.JsonBuilder
 import groovy.json.JsonSlurper
 import groovyx.net.http.ContentType
 import groovyx.net.http.RESTClient
+
+import java.util.logging.Logger
 
 // RESTClient dependency
 // Have to downgrade groovy for it to work
@@ -133,9 +137,9 @@ BigDecimal getAverageTwo(List productList) {
     return productList.average {it.price.toBigDecimal()} as BigDecimal
 }
 
-println "Average One: ${getAverage(economyProducts)}"
-println "Average Two: ${getAverageTwo(economyProducts)}"
-println "Average Three: ${getAverageThree(economyProducts)}"
+//println "Average One: ${getAverage(economyProducts)}"
+//println "Average Two: ${getAverageTwo(economyProducts)}"
+//println "Average Three: ${getAverageThree(economyProducts)}"
 
 def twentyFivePercentOfEconomyAverage = 0.25 * getAverage(economyProducts)
 def twoHundredPercentOfEconomyAverage = 2 * getAverage(economyProducts)
@@ -182,6 +186,11 @@ println "Standard Outliers"
 println standardOutliers
 println "Premium Outliers"
 println premiumOutliers
+
+MyLogger myLogger = new MyLogger()
+myLogger.debug("Economy Total Size: ${economyProducts.size()}")
+
+myLogger.error("One product is not in range")
 
 
 
