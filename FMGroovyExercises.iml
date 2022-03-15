@@ -11,5 +11,6 @@
     <orderEntry type="library" name="codehaus.groovy.modules.http.builder" level="project" />
     <orderEntry type="library" name="slf4j.api" level="project" />
     <orderEntry type="library" name="ch.qos.logback.classic" level="project" />
+    <orderEntry type="library" name="postgresql" level="project" />
   </component>
 </module>

@@ -1,5 +1,6 @@
 package fmexercises.two
 
+import groovy.json.JsonBuilder
 import groovyx.net.http.ContentType
 import groovyx.net.http.RESTClient
 
@@ -16,7 +17,7 @@ client.get(path: '/api/products/order/price') { response, json ->
 }
 
 List<Product> productList = data.collect {
-    new Product(it.id, it.name, it.description, it.price.toBigDecimal(),
+    new Product(it.id.toInteger(), it.name, it.description, it.price.toBigDecimal(),
         it.image_title, it.image)
 }
 
@@ -29,3 +30,11 @@ List<Product> economyProducts = productList.findAll { product ->
 println economyProducts.size()
 
 economyProducts.each {println it.getPrice()}
+
+JsonBuilder builder = new JsonBuilder()
+
+builder.products {
+    economy(economyProducts.sort {it.getId()})
+}
+
+new File('data/usingProduct.json').write(builder.toPrettyString())
