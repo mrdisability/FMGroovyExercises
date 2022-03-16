@@ -65,6 +65,14 @@ List<Product> economyProducts = productList.findAll { product ->
 //     """
 //}
 
+// Best practice from Howard
+//sortedById.each {element ->
+//    sql.execute("""INSERT INTO category_then_id (id, name, description, price, imageTitle, image)
+//VALUES
+//    (?,?,?,?,?,?)
+//""",new ArrayList([element.id.toInteger(),element.name,element.description,element.price.toBigDecimal(),element.imageTitle,element.image]))
+//}
+
 // Create a new file to hold products in and put in the header values
 //def file = new File('products.csv')
 //file.write("id,name,description,price,image_title,image\n")
